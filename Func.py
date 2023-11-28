@@ -24,3 +24,27 @@ def read_fasta():
             dna_sequence.append(value)
 
         return dna_sequence
+
+answers = []
+dna_seq = read_fasta()
+for i in dna_seq:
+    answer = {}
+    for j in range(1, len(i)):
+        for k in range(len(i) - j, 0, -1):
+            h = i.count(i[k::j])
+            if i[k::j] not in answer and h>1:
+                answer[i[k::j]] = h
+
+    sorted_answer = sorted(answer.items(), key=lambda x:x[1])
+    answers.append(sorted_answer)
+
+num = 1
+for dict in answers:
+    print("Seq" + str(num) + ":")
+    num+=1
+
+for key, value in sorted_answer:
+    a= str(key)
+    b= str(value)
+    print(a, ' ', b)
+
